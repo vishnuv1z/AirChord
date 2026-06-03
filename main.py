@@ -1,5 +1,6 @@
 import cv2
 import mediapipe as mp
+from audio_player import ChordAudioPlayer
 from chord_wheel import ChordWheel
 
 # MediaPipe setup
@@ -15,6 +16,7 @@ hands = mp_hands.Hands(
 )
 
 wheel = ChordWheel()
+audio_player = ChordAudioPlayer()
 
 
 def landmark_to_pixel(landmark, width, height):
@@ -74,6 +76,13 @@ while True:
 
     active_chord = wheel.draw(frame, left_index_point)
 
+    if active_chord and right_control == "PLAY":
+        audio_player.play_chord(active_chord)
+    elif active_chord and right_control == "STRUM":
+        audio_player.play_chord(active_chord, force=True)
+    elif right_control in ("MUTE", "IDLE"):
+        audio_player.stop()
+
     # Draw landmarks
     if results.multi_hand_landmarks and results.multi_handedness:
 
@@ -124,4 +133,5 @@ while True:
         break
 
 cap.release()
+audio_player.stop()
 cv2.destroyAllWindows()
