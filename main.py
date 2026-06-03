@@ -5,6 +5,7 @@ from chord_wheel import ChordWheel
 # MediaPipe setup
 mp_hands = mp.solutions.hands
 mp_draw = mp.solutions.drawing_utils
+UI_FONT = cv2.FONT_HERSHEY_DUPLEX
 
 hands = mp_hands.Hands(
     static_image_mode=False,
@@ -96,22 +97,12 @@ while True:
 
             cv2.circle(frame, (x, y), 12, (0, 0, 255), -1)
 
-            cv2.putText(
-                frame,
-                hand_label,
-                (x, y - 20),
-                cv2.FONT_HERSHEY_SIMPLEX,
-                1,
-                (0, 255, 0),
-                2
-            )
-
     if active_chord:
         cv2.putText(
             frame,
             f"Chord: {active_chord}",
             (24, h - 56),
-            cv2.FONT_HERSHEY_SIMPLEX,
+            UI_FONT,
             0.8,
             (255, 255, 255),
             2
@@ -121,7 +112,7 @@ while True:
         frame,
         f"Right: {right_control}",
         (24, h - 24),
-        cv2.FONT_HERSHEY_SIMPLEX,
+        UI_FONT,
         0.8,
         (255, 255, 255),
         2

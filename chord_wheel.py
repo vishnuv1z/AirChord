@@ -1,6 +1,8 @@
 import cv2
 import math
 
+UI_FONT = cv2.FONT_HERSHEY_DUPLEX
+
 
 class ChordWheel:
     def __init__(self):
@@ -111,7 +113,7 @@ class ChordWheel:
                 overlay,
                 chord,
                 (text_x - 15, text_y + 8),
-                cv2.FONT_HERSHEY_SIMPLEX,
+                UI_FONT,
                 max(0.55, outer_radius / 190),
                 text_color,
                 2
@@ -150,7 +152,7 @@ class ChordWheel:
                 frame,
                 hovered_chord,
                 (center_x - 24, center_y + 10),
-                cv2.FONT_HERSHEY_SIMPLEX,
+                UI_FONT,
                 0.9,
                 (255, 255, 255),
                 2
